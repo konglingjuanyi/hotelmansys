@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.wx.model">
+	<class name="Consumer" table="RJ_CONSUMER">
+		<id name="consu_id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="consu_name" length="64" type="string" not-null="true" />
+		<property name="consu_telphone" length="64" type="string" />
+		<property name="consu_identify" length="64" type="string" />
+		<property name="consu_status" length="1" type="string" not-null="true" />
+		<property name="consu_integral" length="10" type="integer" />
+		<property name="consu_say" length="128" type="string"/>
+	
+		<!-- 跟会员卡多对一 -->
+		<many-to-one name="consu_vipId" class="VipCard" />
+		<!-- 跟入住 一对多 -->
+		<set name="consu_stayId" inverse="true">
+			<key column="STAY_CONSUID"></key><!-- 一方在多方建的外键 -->
+			<one-to-many class="RoomStay" />
+		</set>
+		
+		<!-- 跟消费卡一对 多-->
+		<set name="consu_icId" inverse="true">
+			<key column="IC_CONSUID"></key><!-- 一方在多方建的外键 -->
+			<one-to-many class="ICCard" />
+		</set>
+	</class>
+</hibernate-mapping>

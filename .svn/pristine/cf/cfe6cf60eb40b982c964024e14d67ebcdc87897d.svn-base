@@ -1,0 +1,52 @@
+一、插件介绍：
+说明：
+muchlin基于CSDN网友wallimn修改版修改。
+源文件：dtree-ck.source.js 15kb
+压缩版：dtree-ck.compress.js 11kb
+
+改动：
+1、修改可单独设置节点有无checkbox。
+2、调整节点open参数至target参数后面。
+3、添加css文件自动加载方法，使用时只需在head区引用dtree-ck.compress.js。
+4、添加获取选中节点、名称、值、数量的方法 getSelectedNodes()：
+	getSelectedNodes()['nodes']：获取选中节点，dTree节点对象数组
+	getSelectedNodes()['value']：获取选中节点id，即选中checkbox的value，数组
+	getSelectedNodes()['name']：获取选中节点name，数组
+	getSelectedNodes()['count']：获取选中节点个数，数字
+
+5、加addCbx方法，专用于添加checkbox节点
+
+
+二、相关方法及参数说明：
+
+1、实例化dTree对象方法参数说明
+new dTree(objName, rootDir, imgDir);
+objName：dTree实例对象名称, 
+rootDir：dTree根目录, 
+imgDir：图标目录，相对于根目录
+
+2、添加普通节点方法完整参数说明
+add(id, pid, name, url, title, target, open, icon, iconOpen)
+id: 节点id（必须唯一，不能重复）, 
+pid: 父级节点id, 
+name: 节点名称 ,
+url: 连接地址,
+title: 工具提示文本,
+target: 打开方式/窗口,
+open: 打开（是：true/否：false）,
+icon: 节点图标 ,
+iconOpen: 节点打开时图标
+
+例子：demo-menu.html
+
+3、添加checkbox节点方法完整参数说明
+addCbx(id, pid, name, open, checked, icon, iconOpen)
+id: 节点id（必须唯一，不能重复）, 
+pid: 父级节点id, 
+name: 节点名称 ,
+open: 打开（是：true/否：false）,
+checked: 选中（是：true/否：false/无：'none'）,
+icon: 节点图标 ,
+iconOpen: 节点打开时图标
+
+例子：demo-ck.html

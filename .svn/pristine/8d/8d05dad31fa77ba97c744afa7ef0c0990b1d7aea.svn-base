@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>dtree复选框</title>
+<script type="text/javascript" src="dtree-ck.compress.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	var d = new dTree('d');
+	d.config.check=true;
+	/*添加checkbox节点方法完整参数说明
+	addCbx(id, pid, name, open, checked, icon, iconOpen)
+	id: 节点id（必须唯一，不能重复）, 
+	pid: 父级节点id, 
+	name: 节点名称 ,
+	open: 打开（是：true/否：false）,
+	checked: 选中（是：true/否：false/无：'none'）,
+	icon: 节点图标 ,
+	iconOpen: 节点打开时图标
+	*/
+	d.addCbx(0,-1,'系统菜单');
+	d.addCbx(100,0,'系统管理',true);//打开节点
+	d.addCbx(790,100,'菜单管理');
+	d.addCbx(800,100,'组织机构');
+	d.addCbx(810,100,'用户管理',false,'none');//无checkbox
+	d.addCbx(102,0,'系统机构');
+	d.addCbx(300,102,'人员管理');
+	d.addCbx(301,102,'部门管理');
+	d.addCbx(302,102,'机构管理');
+	d.addCbx(103,0,'权限管理');
+	d.addCbx(400,103,'角色维护');
+	d.addCbx(401,103,'功能分配');
+	d.addCbx(402,103,'角色分配');	 
+	document.write(d);
+</script>
+<input type="button" value="获取选中节点id" onclick="alert(d.getSelectedNodes()['value'].join())" />
+<input type="button" value="获取选中节点name" onclick="alert(d.getSelectedNodes()['name'].join())" />
+<input type="button" value="获取选中节点个数" onclick="alert(d.getSelectedNodes()['count'])" />
+<br/>
+getSelectedNodes()['nodes']：获取选中节点，dTree节点对象数组<br/>
+getSelectedNodes()['value']：获取选中节点id，即选中checkbox的value，数组<br/>
+getSelectedNodes()['name']：获取选中节点name，数组<br/>
+getSelectedNodes()['count']：获取选中节点个数，数字
+</body>
+</html>

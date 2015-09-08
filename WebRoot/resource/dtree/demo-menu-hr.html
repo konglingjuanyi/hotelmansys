@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>dTree菜单</title>
+<script type="text/javascript" src="dtree-ck.compress.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+/*实例化dTree对象方法参数说明
+new dTree(objName, rootDir, imgDir);
+objName：dTree实例对象名称, 
+rootDir：dTree根目录, 
+imgDir：图标目录，相对于根目录
+*/
+var d = new dTree('d', './', 'images/hr/');
+
+/*添加节点方法完整参数说明
+add(id, pid, name, url, title, target, open, icon, iconOpen)
+id: 节点id（必须唯一，不能重复）, 
+pid: 父级节点id, 
+name: 节点名称 ,
+url: 连接地址,
+title: 工具提示文本,
+target: 打开方式/窗口,
+open: 打开（是：true/否：false）,
+icon: 节点图标 ,
+iconOpen: 节点打开时图标
+*/
+d.add(0, -1, '天界网络软件开发公司', "javascript:;", '提示');
+d.add(100, 0, '业务部', "javascript:;", '');
+d.add(790, 100, '张sir', "javascript:;", '');
+d.add(800, 100, '李miss', "javascript:;", '');
+d.add(810, 100, '王老头', "javascript:;", '');
+d.add(102, 0, '软件开发部', "javascript:;", '');
+d.add(300, 102, '李coder', "javascript:;", '');
+d.add(301, 102, '赵js', "javascript:;", '');
+d.add(302, 102, '胡ps', "javascript:;", '');
+d.add(103, 0, '售后服务部', "javascript:;", '');
+d.add(400, 103, '八爪sir', "javascript:;", '');
+d.add(401, 103, '技术king', "javascript:;", '');
+d.add(402, 103, '维护员nx', "javascript:;", '');
+document.write(d);
+</script>
+</body>
+</html>

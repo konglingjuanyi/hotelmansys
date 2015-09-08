@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.shxt.model">
+	<class name="LoginLogger" table="WEB_SYS_LOGIN_LOG">
+		<!-- 配置主键/主键生成策略 -->
+		<id name="id" type="integer">
+			<!-- 使用hibernate提供的序列 -->
+			<generator class="sequence">
+				<param name="sequence">LOGGER_SEQ</param>
+			</generator>
+		</id>
+		
+		<!-- 配置普通属性 -->
+		<property name="account" column="ACCOUNT" not-null="true" length="64" type="string"/>
+		<property name="userName" column="USER_NAME"  length="64" type="string"/>
+		<property name="ipAddress" column="LOGIN_ID"  length="15" type="string"/>
+		<property name="loginTime" column="LOGIN_TIME"  type="timestamp"/>
+		<property name="loginOutTime" column="LOGIN_OUT_TIME"  type="timestamp"/>
+		
+		</class>
+	
+</hibernate-mapping>

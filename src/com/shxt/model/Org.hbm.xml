@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.shxt.model">
+	<class name="Org" table="WEB_SYS_ORG">
+		<!-- 配置主键/主键生成策略 -->
+		<id name="org_id" column="ORG_ID" type="integer">
+			<!-- 使用hibernate提供的序列 -->
+			<generator class="native"></generator>
+		</id>
+		
+		<!-- 配置普通属性 -->
+		<property name="org_name" column="ORG_NAME" length="64" type="string"/>
+		<property name="org_desc" column="ORG_DESC"  length="128" type="string"/>
+		<property name="org_status" length="1" type="string"></property>
+		
+		<set name="userSet" inverse="true">
+			<key column="ORG_ID"></key><!-- 一方在多方建的外键 -->
+			<one-to-many class="User" />
+		</set>
+		
+	</class>
+	
+</hibernate-mapping>

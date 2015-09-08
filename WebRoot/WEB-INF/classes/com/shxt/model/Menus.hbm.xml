@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.shxt.model">
+	<class name="Menus" table="WEB_SYS_MENUS">
+		<!-- 配置主键/主键生成策略 -->
+		<id name="menu_id" column="MENU_ID" type="integer">
+			<!-- 使用hibernate提供的序列 -->
+			<generator class="native"></generator>
+		</id>
+		
+		<!-- 配置普通属性 -->
+		<property name="menu_name" column="MENU_NAME" not-null="true" length="64" type="string"/>
+		<property name="menu_url" column="MENU_URL"  length="64" type="string"/>
+		<property name="parent_id" column="PARENT_ID"  type="integer"/>
+		<property name="menu_status" column="MENU_STATUS"  length="1" type="string"/>
+		<property name="menu_icon" column="MENU_ICON"  length="64" type="string"/>
+		<property name="menu_position" column="MENU_POSITION"  length="10" type="string"/>
+		<property name="parent_name" length="64" type="string"></property>
+		
+		<!-- 菜单和角色多对多-->
+		<set name="roleSet" table="LINK_ROLE_MENU">
+			<key column="MENU_ID"/>
+			<many-to-many class="Role" column="ROLE_ID"/>
+		</set>
+		
+	</class>
+	
+</hibernate-mapping>

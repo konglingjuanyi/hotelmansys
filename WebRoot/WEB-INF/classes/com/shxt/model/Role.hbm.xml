@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.shxt.model">
+	<class name="Role" table="WEB_SYS_ROLE">
+		<!-- 配置主键/主键生成策略 -->
+		<id name="role_id" column="ROLE_ID" type="integer">
+			<!-- 使用hibernate提供的序列 -->
+			<generator class="native"></generator>
+		</id>
+		
+		<!-- 配置普通属性 -->
+		<property name="role_name" column="ROLE_NAME" length="64" type="string"/>
+		<property name="role_desc" column="ROLE_DESC"  length="64" type="string"/>
+		<property name="role_status" column="ROLE_STATUS"  length="1" type="string"/>
+		 
+		<set name="userSet" table="LINK_USER_ROLE" >
+			<key column="ROLE_ID"/>
+			<many-to-many class="User" column="USER_ID"/>
+		</set>
+		
+		<set name="menusSet" table="LINK_ROLE_MENU">
+			<key column="ROLE_ID"/>
+			<many-to-many class="Menus" column="MENU_ID"/>
+		</set>
+	</class>
+	
+</hibernate-mapping>

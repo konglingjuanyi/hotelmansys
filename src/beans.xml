@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xmlns:task="http://www.springframework.org/schema/task"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd
+          http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/task   
+      http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+       
+    <!-- 定时器开关 -->
+     <task:annotation-driven/>
+     <!-- 读取本地的属性文件 -->
+	 <context:property-placeholder location="classpath:jdbc.properties" />
+	 
+	 <!-- 建立数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<property name="minIdle" value="${jdbc.minIdle}" />
+	</bean>
+	
+	<!-- 建立SessionFaction -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>com/shxt/model/User.hbm.xml</value>
+				<value>com/shxt/model/Menus.hbm.xml</value>
+				<value>com/shxt/model/Org.hbm.xml</value>
+				<value>com/shxt/model/Role.hbm.xml</value>
+				<value>com/shxt/model/LoginLogger.hbm.xml</value>
+				<value>com/wx/model/RoomType.hbm.xml</value>
+				<value>com/wx/model/Room.hbm.xml</value>
+				<value>com/wx/model/Product.hbm.xml</value>
+				<value>com/wx/model/ProductType.hbm.xml</value>
+				<value>com/wx/model/VipCard.hbm.xml</value>
+				<value>com/wx/model/Consumer.hbm.xml</value>
+				<value>com/wx/model/RoomStay.hbm.xml</value>
+				<value>com/wx/model/ICCard.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<!-- <prop key="hibernate.current_session_context_class">thread</prop> -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.format_sql">false</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 声明事务 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 使用AOP监听事务 
+		表达式的设置:一定设置到Service层
+	-->
+	<aop:config>
+		<aop:pointcut id="allMethods" expression="execution(* com.shxt.service.*.*(..))||execution(* com.wx.service.*.*(..))||execution(* com.shxt.task.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="allMethods" />
+	</aop:config>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="mod*" propagation="REQUIRED" />
+			<tx:method name="rem*" propagation="REQUIRED" />
+			<tx:method name="inse*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="edi*" propagation="REQUIRED" />
+			<tx:method name="exit*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+     <!-- baseDao需要连接数据 -->
+     <bean id="baseDao" class="com.shxt.dao.BaseDaoImpl">
+     	<property name="sessionFactory" ref="sessionFactory"></property>
+     </bean>
+     
+     <!-- 配置用户管理 -->
+     <bean id="userService" class="com.shxt.service.UserServiceImpl" >
+     	<property name="baseDao" ref="baseDao"></property>
+     </bean>
+     
+     <bean id="userAction" class="com.shxt.action.UserAction" scope="prototype">
+     	<property name="userService" ref="userService"></property>
+     </bean>
+     
+      <!-- 菜单 -->
+     <bean id="menuService" class="com.shxt.service.MenuServiceImpl">
+     	<property name="baseDao" ref="baseDao"></property>
+     </bean>
+     <bean id="menuAction" class="com.shxt.action.MenuAction" scope="prototype">
+     	<property name="menuService" ref="menuService"></property>
+     </bean>
+     
+     <!--  配置角色-->
+     <bean id="roleService" class="com.shxt.service.RoleServiceImpl">
+     	<property name="baseDao" ref="baseDao"></property>
+     </bean>
+     <bean id="roleAction" class="com.shxt.action.RoleAction" scope="prototype">
+     	<property name="menuService" ref="menuService"></property>
+     	<property name="roleService" ref="roleService"></property>
+     </bean>
+     
+     <!-- 配置组织 -->
+     <bean id="orgService" class="com.shxt.service.OrgServiceImpl">
+      	<property name="baseDao" ref="baseDao"></property>
+     </bean>
+     <bean id="orgAction" class="com.shxt.action.OrgAction" scope="prototype">
+     	<property name="orgService" ref="orgService"></property>
+     </bean>
+	
+	
+	<!--  logger登录配置配置 -->
+	<bean id="loggerService" class="com.shxt.service.LoggerServiceImpl" >
+		<property name="baseDao" ref="baseDao"></property>
+	</bean>
+	<!-- login配置 -->
+     <bean id="loginAction" class="com.shxt.action.LoginAction" scope="prototype">
+     	<property name="userService" ref="userService"></property>
+     </bean>
+	<bean id="exitAction" class="com.shxt.action.ExitAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	<bean id="loginLoggerInterceptor" class="com.shxt.interceptor.LoginLoggerInterceptor" scope="prototype">
+		<property name="loggerService" ref="loggerService"></property>
+	</bean>
+	<bean id="exitLoggerInterceptor" class="com.shxt.interceptor.ExitLoggerInterceptor" scope="prototype">
+		<property name="loggerService" ref="loggerService"></property>
+	</bean>
+	
+	<!-- 房间类型 -->
+	<bean id="roomTypeService" class="com.wx.service.RoomTypeImpl">
+		<property name="baseDao" ref="baseDao"></property>
+	</bean>
+	<bean id="roomTypeAction" class="com.wx.action.RoomTypeAction" scope="prototype">
+		<property name="roomTypeService" ref="roomTypeService"></property>
+	</bean>
+	<!-- 房间 -->
+	<bean id="roomService" class="com.wx.service.RoomServiceImpl">
+		<property name="baseDao" ref="baseDao"></property>
+	</bean>
+	<bean id="roomAction" class="com.wx.action.RoomAction" scope="prototype">
+		<property name="roomService" ref="roomService"></property>
+	</bean>
+	<!-- 商品类型 -->
+	<bean id="productTypeService" class="com.wx.service.ProductTypeServiceImpl">
+		<property name="baseDao" ref="baseDao"></property>
+	</bean>
+	<bean id="productTypeAction" class="com.wx.action.ProductTypeAction" scope="prototype">
+		<property name="typeService" ref="productTypeService"></property>
+	</bean>
+	<!-- 商品 -->
+	<bean id="productService" class="com.wx.service.ProductServiceImpl">
+		<property name="baseDao" ref="baseDao"></property>
+	</bean>
+	<bean id="productAction" class="com.wx.action.ProductAction" scope="prototype">
+		<property name="productService" ref="productService"></property>
+	</bean>
+	<!-- vipCard -->
+	<bean id="vipCardService" class="com.wx.service.VipCardServiceImpl">
+		<property name="baseDao" ref="baseDao"></property>
+	</bean>
+	<bean id="vipCardAction" class="com.wx.action.VipCardAction" scope="prototype">
+		<property name="vipCardService" ref="vipCardService"></property>
+	</bean>
+	<!-- 顾客 -->
+	<bean id="consumerService" class="com.wx.service.ConsumerServiceImpl">
+		<property name="baseDao" ref="baseDao"></property>
+	</bean>
+	<bean id="consumerAction" class="com.wx.action.ConsumerAction" scope="prototype">
+		<property name="consuService" ref="consumerService"></property>
+		<property name="icCardService" ref="icCardService"></property>
+	</bean>
+	<!-- 入住 -->
+	<bean id="roomStayService" class="com.wx.service.RoomStayServiceImpl">
+		<property name="baseDao" ref="baseDao"></property>
+	</bean>
+	<bean id="roomStayAction" class="com.wx.action.RoomStayAction" scope="prototype">
+		<property name="roomStayService" ref="roomStayService"></property>
+		<property name="roomService" ref="roomService"></property>
+		<property name="consuService" ref="consumerService"></property>
+		<property name="icCardService" ref="icCardService"></property>
+	</bean>
+	<!-- 消费卡iccard -->
+	<bean id="icCardService" class="com.wx.service.ICCardServiceImpl">
+		<property name="baseDao" ref="baseDao"></property>
+	</bean>
+	<bean id="icCardAction" class="com.wx.action.ICCardAction" scope="prototype">
+		<property name="icCardService" ref="icCardService"></property>
+		<property name="productService" ref="productService"></property>
+		<property name="typeService" ref="productTypeService"></property>
+	</bean>
+	<!-- 住房消费 -->
+	<bean id="funsionChartService" class="com.wx.service.FunsionChartServiceImpl">
+		<property name="baseDao" ref="baseDao"></property>
+	</bean>
+	<bean id="funsionChartAction" class="com.wx.action.FunsionChartAction" scope="prototype">
+		<property name="funsionCharService" ref="funsionChartService"></property>
+	</bean>
+	<!-- 测试任务调度 -->
+	<bean id="taskTest" class="com.shxt.task.TaskTest">
+		<property name="baseDao" ref="baseDao"/>
+	</bean>
+	<!-- 设置任务规则-->
+	<task:scheduled-tasks>
+		<task:scheduled ref="taskTest" method="update" cron="0 */2 * * * ?"/>
+		<task:scheduled ref="taskTest" method="test" cron="0 */2 * * * ?"/>
+	</task:scheduled-tasks>
+	
+	
+	<!-- json -->
+	<bean id="jsonAjaxAction" class="com.shxt.action.JsonAjaxAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+		<property name="orgService" ref="orgService"></property>
+		<property name="roleService" ref="roleService"></property>
+		<property name="roomTypeService" ref="roomTypeService"></property>
+		<property name="roomService" ref="roomService"></property>
+		<property name="typeService" ref="productTypeService"></property>
+		<property name="productService" ref="productService"></property>
+		<property name="vipCardService" ref="vipCardService"></property>
+		<property name="consuService" ref="consumerService"></property>
+		<property name="roomStayService" ref="roomStayService"></property>
+		<property name="icCardService" ref="icCardService"></property>
+	</bean>
+</beans>

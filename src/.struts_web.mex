@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="web-default" location="243,165" size="225,1542">
+    <action name="*LoginAction" location="65,47" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="login.jsp" />
+      </result>
+    </action>
+    <action name="*ExitAction" location="10,670" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="login.jsp" />
+      </result>
+    </action>
+    <action name="*UserAction" location="65,152" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="${toJsp}.jsp" />
+      </result>
+    </action>
+    <action name="*RoleAction" location="65,292" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="${toJsp}.jsp" />
+      </result>
+    </action>
+    <action name="*OrgAction" location="65,432" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="${toJsp}.jsp" />
+      </result>
+    </action>
+    <action name="*MenuAction" location="65,572" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="${toJsp}.jsp" />
+      </result>
+    </action>
+    <action name="*RoomTypeAction" location="10,770" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="${toJsp}.jsp" />
+      </result>
+    </action>
+    <action name="*RoomAction" location="10,870" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="${toJsp}.jsp" />
+      </result>
+    </action>
+    <action name="*ProductTypeAction" location="10,970" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="${toJsp}.jsp" />
+      </result>
+    </action>
+    <action name="*ProductAction" location="10,1070" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="${toJsp}.jsp" />
+      </result>
+    </action>
+    <action name="*VipCardAction" location="10,1170" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="${toJsp}.jsp" />
+      </result>
+    </action>
+    <action name="*ConsumerAction" location="10,1270" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="${toJsp}.jsp" />
+      </result>
+    </action>
+    <action name="*RoomStayAction" location="10,1370" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="${toJsp}.jsp" />
+      </result>
+    </action>
+    <action name="*ICCardAction" location="10,1470" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="${toJsp}.jsp" />
+      </result>
+    </action>
+  </package>
+  <package name="web-statistic-default" location="500,50" size="170,71">
+    <action name="*FunsionChartAction" location="10,20" size="150,41">
+      <result name="success" />
+    </action>
+  </package>
+  <package name="web-json-default" location="50,200" size="170,71">
+    <action name="*JsonAjaxAction" location="10,20" size="150,41">
+      <result name="json" />
+    </action>
+  </package>
+  <webResource name="${toJsp}.jsp" path="/jsp/${toFolder}/${toJsp}.jsp" location="10,815" size="150,55" />
+  <webResource name="login.jsp" path="/login.jsp" location="333,10" size="150,55" />
+</Struts2Diagram>
+

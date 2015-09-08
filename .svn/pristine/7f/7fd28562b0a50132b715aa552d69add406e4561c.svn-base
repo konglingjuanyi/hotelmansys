@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.shxt.model">
+	<class name="User" table="WEB_SYS_USER">
+		<!-- 配置主键/主键生成策略 -->
+		<id name="accountId" column="USER_ID" type="integer">
+			<!-- 使用hibernate提供的序列 -->
+			<generator class="native"></generator>
+		</id>
+		
+		<!-- 配置普通属性 -->
+		<property name="account" column="ACCOUNT" not-null="true" length="64" type="string"/>
+		<property name="password" column="PASSWORD" not-null="true" length="128" type="string"/>
+		<property name="userName" column="USER_NAME"  length="64" type="string"/>
+		<property name="telphone" column="TELPHONE"  length="20" type="string"/>
+		<property name="sex" column="SEX"  length="2" type="string"/>
+		<property name="position" column="POSITION"  length="20" type="string"/>
+		<property name="identity" column="IDENTITY" length="64" type="string"/>
+		<property name="homePage" column="HOMEPAGE"  length="128" type="string"/>
+		<property name="email" column="EMAIL" length="128" type="string"/>
+		<property name="isDel" column="ISDEL" length="1" type="string"/>
+		<property name="accountStatus" column="ACCOUNT_STATUS" length="1" type="string"/>
+		<property name="photo" column="PHOTO" type="string"/>
+		<!-- 日期格式 -->
+		<property name="createTime" column="CREATE_TIME" type="date"/>
+		
+		
+		<!-- 外键 -->
+		<many-to-one name="org" column="ORG_ID" class="Org"></many-to-one>
+		<set name="roleSet" table="LINK_USER_ROLE">
+			<key column="USER_ID"/>
+			<many-to-many class="Role" column="ROLE_ID"/>
+		</set></class>
+	
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.wx.model">
+	<class name="RoomStay" table="RJ_ROOMSTAY">
+		<id name="stay_id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="stay_prepStatus" length="1" type="string" not-null="true" />
+		<property name="stay_startDate" type="date" />
+		<property name="stay_quitDate" type="date" />
+		<property name="stay_money" type="float" />
+		<property name="stay_days" type="integer" />
+		<property name="stay_prepTel" length="64" type="string"></property>	
+		
+		<!-- 跟客房 多对一 -->
+		<many-to-one name="stay_roomId" class="Room" />
+		<!-- 跟顾客多对一 -->
+		<many-to-one name="stay_consuId" class="Consumer" />
+	</class>
+</hibernate-mapping>

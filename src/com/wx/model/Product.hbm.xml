@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.wx.model">
+	<class name="Product" table="RJ_PRODUCT">
+		<id name="pro_id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="pro_name" length="128" type="string" />
+		<property name="pro_price" type="float" />
+		<property name="pro_inprice" type="float" />
+		<property name="pro_store" length="64" type="integer" />
+		<property name="pro_outstore" length="64" type="integer" />
+		<property name="pro_unit" length="64" type="string" />
+		<property name="pro_startDate" type="date" />
+		<property name="pro_endDate" type="date" />
+		<property name="pro_status" length="1" type="string" />
+	
+		<!-- 跟商品类型多对一 -->
+		<many-to-one name="pro_typeId" class="ProductType" />
+	</class>
+</hibernate-mapping>

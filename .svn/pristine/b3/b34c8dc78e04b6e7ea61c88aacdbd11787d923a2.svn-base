@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="web_urp"
+  id="myeclipse.1373683808228"
+  context-root="/web_urp"
+  j2ee-spec="5.0"
+  archive="web_urp.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

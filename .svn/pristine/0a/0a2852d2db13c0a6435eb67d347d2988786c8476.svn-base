@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.wx.model">
+	<class name="VipCard" table="RJ_VIPCARD">
+		<id name="vip_id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="vip_name" length="128" type="string" not-null="true" />
+		<property name="vip_discount" type="float" />
+		
+		<set name="vip_consuId" inverse="true">
+			<key column="CONSU_VIPID"></key><!-- 一方在多方建的外键 -->
+			<one-to-many class="Consumer" />
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.wx.model">
+	<class name="RoomType" table="RJ_ROOMTYPE">
+		<id name="type_id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="type_name" length="128" type="string" not-null="true" />
+		<property name="type_status" length="1" type="string" not-null="true" />
+		<property name="type_photo" length="64" type="string"></property>
+		
+		<set name="type_roomId" inverse="true">
+			<key column="ROOM_TYPEID"></key><!-- 一方在多方建的外键 -->
+			<one-to-many class="Room" />
+		</set>
+	</class>
+</hibernate-mapping>

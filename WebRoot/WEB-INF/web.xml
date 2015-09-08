@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<!-- <filter>
+		<filter-name>LoginSessionFilter</filter-name>
+		<filter-class>com.shxt.filter.LoginSessionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginSessionFilter</filter-name>
+		<url-pattern>/jsp/*</url-pattern>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	 -->
+	<!-- spring配置文件初始化 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:beans.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- Spring中提供了 org.springframework.orm.hibernate3.support.OpenSessionInViewFilter; 
+		这个类来实现OpenSessionInViewer的操作 -->
+	<filter>
+		<filter-name>openSessionInViewerFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>openSessionInViewerFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	
+	<!-- 配置Struts2过滤器 -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

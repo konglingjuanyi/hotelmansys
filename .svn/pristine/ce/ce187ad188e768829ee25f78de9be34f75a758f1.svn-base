@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 如何去查找常量? -->
+	<constant name="struts.ui.theme" value="simple"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <!-- 修改核心配置文件不要重启服务器 -->
+    <constant name="struts.devMode" value="false" />
+	<!-- 配置文件上传限制大小 -->
+	<constant name="struts.multipart.maxSize" value="20971520"></constant>
+    
+    <!-- 加入spring管理 -->
+    <constant name="struts.objectFactory" value="spring"></constant>
+    
+    <package name="base-default" namespace="/" extends="struts-default">
+    	<interceptors>
+    		<interceptor name="loginInterceptor" class="loginLoggerInterceptor">
+    			<param name="sessionKey">session_user</param>
+    			<param name="resultCode">login</param>
+    		</interceptor>
+    		<interceptor name="exitInterceptor" class="exitLoggerInterceptor">
+    			<param name="sessionKey">session_user</param>
+    			<param name="resultCode">login</param>
+    		</interceptor>
+    	</interceptors>
+    
+    	<!-- 全局的结果值 -->
+		<global-results>
+			<result name="login">/login.jsp</result>
+			<result name="error">/error.jsp</result>
+		</global-results>
+		<!-- 全局的异常处理 -->
+		<global-exception-mappings>
+    		<exception-mapping result="error" exception="java.lang.ArithmeticException"></exception-mapping>
+    		<exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>
+    	</global-exception-mappings>
+    </package>
+</struts>

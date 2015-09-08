@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="web-default" namespace="/" extends="base-default">
+		
+		<action name="*LoginAction" class="loginAction" method="{1}">
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<result name="input">/login.jsp</result>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		<action name="*ExitAction" class="exitAction" method="{1}">
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<result name="input">/login.jsp</result>
+			<interceptor-ref name="exitInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		<!-- 关于用户的操作 -->
+		<action name="*UserAction" class="userAction" method="{1}">
+			<!-- 成功跳转的显示页面 转向标 -->
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<!-- 关于验证失败或者异常用于给用户显示的页面 -->
+			<result name="input">/jsp/${toFolder}/${toJsp}.jsp</result>
+		</action>
+		
+		<!-- 关于角色的操作 -->
+		<action name="*RoleAction" class="roleAction" method="{1}">
+			<!-- 成功跳转的显示页面 转向标 -->
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<!-- 关于验证失败或者异常用于给用户显示的页面 -->
+			<result name="input">/jsp/${toFolder}/${toJsp}.jsp</result>
+		</action>
+		
+		
+		<!-- 关于部门的操作 -->
+		<action name="*OrgAction" class="orgAction" method="{1}">
+			<!-- 成功跳转的显示页面 转向标 -->
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<!-- 关于验证失败或者异常用于给用户显示的页面 -->
+			<result name="input">/jsp/${toFolder}/${toJsp}.jsp</result>
+		</action>
+		
+		
+		<!-- 关于菜单的操作 -->
+		<action name="*MenuAction" class="menuAction" method="{1}">
+			<!-- 成功跳转的显示页面 转向标 -->
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<!-- 关于验证失败或者异常用于给用户显示的页面 -->
+			<result name="input">/jsp/${toFolder}/${toJsp}.jsp</result>
+		</action>
+     	<!-- 关于房间类型的操作 -->
+		<action name="*RoomTypeAction" class="roomTypeAction" method="{1}">
+			<!-- 成功跳转的显示页面 转向标 -->
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<!-- 关于验证失败或者异常用于给用户显示的页面 -->
+			<result name="input">/jsp/${toFolder}/${toJsp}.jsp</result>
+		</action>
+		<!-- 房间 -->
+		<action name="*RoomAction" class="roomAction" method="{1}">
+			<!-- 成功跳转的显示页面 转向标 -->
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<!-- 关于验证失败或者异常用于给用户显示的页面 -->
+			<result name="input">/jsp/${toFolder}/${toJsp}.jsp</result>
+		</action>
+		<!-- 商品类型 -->
+		<action name="*ProductTypeAction" class="productTypeAction" method="{1}">
+			<!-- 成功跳转的显示页面 转向标 -->
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<!-- 关于验证失败或者异常用于给用户显示的页面 -->
+			<result name="input">/jsp/${toFolder}/${toJsp}.jsp</result>
+		</action>
+		<!-- 商品 -->
+		<action name="*ProductAction" class="productAction" method="{1}">
+			<!-- 成功跳转的显示页面 转向标 -->
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<!-- 关于验证失败或者异常用于给用户显示的页面 -->
+			<result name="input">/jsp/${toFolder}/${toJsp}.jsp</result>
+		</action>
+		<!-- 会员卡 -->
+		<action name="*VipCardAction" class="vipCardAction" method="{1}">
+			<!-- 成功跳转的显示页面 转向标 -->
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<!-- 关于验证失败或者异常用于给用户显示的页面 -->
+			<result name="input">/jsp/${toFolder}/${toJsp}.jsp</result>
+		</action>
+		<!-- 会员 -->
+		<action name="*ConsumerAction" class="consumerAction" method="{1}">
+			<!-- 成功跳转的显示页面 转向标 -->
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<!-- 关于验证失败或者异常用于给用户显示的页面 -->
+			<result name="input">/jsp/${toFolder}/${toJsp}.jsp</result>
+		</action>
+		<!-- 入住 -->
+		<action name="*RoomStayAction" class="roomStayAction" method="{1}">
+			<!-- 成功跳转的显示页面 转向标 -->
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<!-- 关于验证失败或者异常用于给用户显示的页面 -->
+			<result name="input">/jsp/${toFolder}/${toJsp}.jsp</result>
+		</action>
+		<!-- 消费卡 -->
+		<action name="*ICCardAction" class="icCardAction" method="{1}">
+			<!-- 成功跳转的显示页面 转向标 -->
+			<result name="success">/jsp/${toFolder}/${toJsp}.jsp</result>
+			<!-- 关于验证失败或者异常用于给用户显示的页面 -->
+			<result name="input">/jsp/${toFolder}/${toJsp}.jsp</result>
+		</action>
+    </package>
+	<!-- funsionChart -->
+	<package name="web-statistic-default" namespace="/" extends="base-default">
+     	<action name="*FunsionChartAction" class="funsionChartAction" method="{1}">
+     		<result type="plainText"/>
+     	</action>
+     </package>
+     
+	<!-- json -->
+   <package name="web-json-default" namespace="/" extends="json-default">
+		<action name="*JsonAjaxAction" class="jsonAjaxAction" method="{1}">
+			<result name="json" type="json">
+				<param name="root">jsonResult</param>
+				<!-- 设置false,解决不能被继承的问题 -->
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>  
+
+</struts>

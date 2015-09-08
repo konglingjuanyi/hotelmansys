@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.wx.model">
+	<class name="ICCard" table="RJ_ICCARD">
+		<id name="ic_id" column="IC_ID" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="ic_proName" length="128" type="string" />
+		<property name="ic_proNum" length="128" type="string" />
+		<property name="ic_proPrice" length="128" type="string" />
+		<property name="ic_time" type="date" />
+		<property name="ic_outMoney" type="float" />
+		
+		<many-to-one name="ic_consuId" class="Consumer" />
+	</class>
+</hibernate-mapping>

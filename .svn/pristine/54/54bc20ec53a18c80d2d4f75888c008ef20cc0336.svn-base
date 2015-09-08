@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.wx.model">
+	<class name="Room" table="RJ_ROOM">
+		<id name="room_id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="room_name" length="128" type="string" not-null="true" />
+		<property name="room_site" length="64" type="string" />
+		<property name="room_capacity" length="10" type="string" />
+		<property name="room_price" type="float" />
+		<property name="room_bargain" length="1" type="string" />
+		<property name="room_barprice" type="float" />
+		<property name="room_status" length="1" type="string" />
+		<property name="bar_startDate" type="date" />
+		<property name="bar_endDate" type="date" />
+	
+		<!-- 跟客房类型 多对一-->
+		<many-to-one name="room_typeId" class="RoomType" />
+	</class>
+</hibernate-mapping>
